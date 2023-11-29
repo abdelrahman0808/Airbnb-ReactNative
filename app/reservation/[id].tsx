@@ -11,11 +11,12 @@ import Animated, {
   useScrollViewOffset,
 } from 'react-native-reanimated';
 import { defaultStyles } from '@/constants/Styles';
-import { addDoc, collection, getDocs, query, setDoc, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { doc, getDoc } from "firebase/firestore";
 import { db } from '@/firebaseConfig';
 import CalendarView from '@/components/CalendarView';
 import moment from 'moment';
+
 
 const { width } = Dimensions.get('window');
 const IMG_HEIGHT = 300;
@@ -29,7 +30,19 @@ const DetailsPage = () => {
   const [endDay, setEndDay] = useState<any>(null);
   const navigation = useNavigation();
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
+  const onDelete = async(id:any)=> {
 
+    try {
+            await deleteDoc(doc(db, 'reservations', `${id}`))
+
+     
+
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
   const getData = async () => {
     // something here is wrong
 
@@ -124,7 +137,7 @@ const DetailsPage = () => {
         />
 
         <View style={styles.infoContainer}>
-       
+
           <Text style={styles.location}>
             {listing.room_type} in {listing.smart_location}
           </Text>
@@ -140,6 +153,10 @@ const DetailsPage = () => {
           </View>
           <Text style={styles.location}>Start Date :{listing.startDate}</Text>
           <Text style={styles.location}>End Date :{listing.endDate}</Text>
+          <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20, marginTop: 20 }]} onPress={ () => onDelete(listing.id) }>
+            <Text style={defaultStyles.btnText}>Cancel Reservation</Text>
+          </TouchableOpacity>
+
           {/* <View style={styles.divider} />
 
           <View style={styles.hostView}>
@@ -174,7 +191,7 @@ const DetailsPage = () => {
             startDate: startDay,
             endDate: endDay,
             listingId: id,
-            totalPrice:listing.price * (moment(endDay).diff(moment(startDay), 'days') +1)
+            totalPrice: listing.price * (moment(endDay).diff(moment(startDay), 'days') + 1)
 
           });
           router.push('/trips')

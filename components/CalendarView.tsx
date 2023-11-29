@@ -1,9 +1,13 @@
 import {
+    TouchableOpacity,
     View
 } from 'react-native'
 import { Calendar } from "react-native-calendars";
 import moment from "moment";
 import { useState } from 'react';
+import { router } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+import Colors from '@/constants/Colors';
 
 const CalendarView = ({
     startDay,
@@ -20,6 +24,14 @@ const CalendarView = ({
 
     return (
         <View>
+             <TouchableOpacity
+              onPress={() => router.back()}
+              style={{
+                backgroundColor: '#fff',
+                borderColor: Colors.grey,
+              }}>
+              <Ionicons name="close-outline" size={22} />
+            </TouchableOpacity>
             <Calendar
                 style={{
                     marginTop: 40
