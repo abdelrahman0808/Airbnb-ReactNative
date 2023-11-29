@@ -34,6 +34,8 @@ const DetailsPage = () => {
 
     try {
             await deleteDoc(doc(db, 'reservations', `${id}`))
+            router.push('/trips')
+
 
      
 
@@ -153,7 +155,7 @@ const DetailsPage = () => {
           </View>
           <Text style={styles.location}>Start Date :{listing.startDate}</Text>
           <Text style={styles.location}>End Date :{listing.endDate}</Text>
-          <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20, marginTop: 20 }]} onPress={ () => onDelete(listing.id) }>
+          <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20, marginTop: 20 }]} onPress={ () => onDelete(id) }>
             <Text style={defaultStyles.btnText}>Cancel Reservation</Text>
           </TouchableOpacity>
 
