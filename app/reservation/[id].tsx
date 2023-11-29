@@ -67,12 +67,12 @@ const DetailsPage = () => {
       ),
       headerRight: () => (
         <View style={styles.bar}>
-          <TouchableOpacity style={styles.roundButton} onPress={shareListing}>
+          {/* <TouchableOpacity style={styles.roundButton} onPress={shareListing}>
             <Ionicons name="share-outline" size={22} color={'#000'} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.roundButton}>
             <Ionicons name="heart-outline" size={22} color={'#000'} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       ),
       headerLeft: () => (
@@ -124,7 +124,7 @@ const DetailsPage = () => {
         />
 
         <View style={styles.infoContainer}>
-          <Text style={styles.name}>{listing.startDate}</Text>
+       
           <Text style={styles.location}>
             {listing.room_type} in {listing.smart_location}
           </Text>
@@ -138,7 +138,9 @@ const DetailsPage = () => {
               {listing.review_scores_rating / 20} · {listing.number_of_reviews} reviews
             </Text>
           </View>
-          <View style={styles.divider} />
+          <Text style={styles.location}>Start Date :{listing.startDate}</Text>
+          <Text style={styles.location}>End Date :{listing.endDate}</Text>
+          {/* <View style={styles.divider} />
 
           <View style={styles.hostView}>
             <Image source={{ uri: listing.host_picture_url }} style={styles.host} />
@@ -147,11 +149,11 @@ const DetailsPage = () => {
               <Text style={{ fontWeight: '500', fontSize: 16 }}>Hosted by {listing.host_name}</Text>
               <Text>Host since {listing.host_since}</Text>
             </View>
-          </View>
+          </View> */}
 
-          <View style={styles.divider} />
+          {/* <View style={styles.divider} />
 
-          <Text style={styles.description}>{listing.description}</Text>
+          <Text style={styles.description}>{listing.description}</Text> */}
         </View>
         <View>
         </View>
@@ -167,7 +169,7 @@ const DetailsPage = () => {
         }}>
         <CalendarView startDay={startDay} endDay={endDay} setStartDay={setStartDay} setEndDay={setEndDay} />
         <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20 }]} onPress={async () => {
-          console.log('here we apply reservation', startDay, endDay)
+          // console.log('here we apply reservation', startDay, endDay)
           await addDoc(collection(db, "reservations"), {
             startDate: startDay,
             endDate: endDay,
@@ -182,7 +184,7 @@ const DetailsPage = () => {
         </TouchableOpacity>
       </Modal>
 
-      <Animated.View style={defaultStyles.footer} entering={SlideInDown.delay(200)}>
+      {/* <Animated.View style={defaultStyles.footer} entering={SlideInDown.delay(200)}>
         <View
           style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <TouchableOpacity style={styles.footerText}>
@@ -193,7 +195,7 @@ const DetailsPage = () => {
             <Text style={defaultStyles.btnText}>Reserve</Text>
           </TouchableOpacity>
         </View>
-      </Animated.View>
+      </Animated.View> */}
     </View>
   );
 };

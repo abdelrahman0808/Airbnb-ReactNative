@@ -1,12 +1,9 @@
 import { View } from 'react-native';
 import React, { useEffect, useMemo, useState } from 'react';
 import ListingsBottomSheet from '@/components/ListingsBottomSheet';
-import ListingsMap from '@/components/ListingsMap';
-import listingsDataGeo from '@/assets/data/airbnb-listings.geo.json';
-import { Stack } from 'expo-router';
-import ExploreHeader from '@/components/ExploreHeader';
 import {db} from '../../firebaseConfig';
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import Trips from '@/components/trips';
 
 const Page = () => {
   const [items, setItems] = useState<any[]>([]);
@@ -40,9 +37,9 @@ const Page = () => {
   }
 
   return (
-    <View style={{ flex: 1, marginTop: 80 }}>
+    <View style={{ flex: 1, marginTop: 0 }}>
       {/* Define pour custom header */}
-      <ListingsBottomSheet listings={items} category={category} linkTo='/reservation/' />
+      <Trips listings={items} category={category} linkTo='/reservation/' />
     </View>
   );
 };
