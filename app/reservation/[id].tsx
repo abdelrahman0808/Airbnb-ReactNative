@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Share, Modal } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, Share, Modal, DevSettings } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import Animated, {
@@ -22,6 +22,7 @@ const { width } = Dimensions.get('window');
 const IMG_HEIGHT = 300;
 
 const DetailsPage = () => {
+  
   const { id } = useLocalSearchParams();
   const [listing, setListing] = useState<any>({});
   const [isLoading, setIsLoading] = useState(true);
@@ -37,12 +38,10 @@ const DetailsPage = () => {
             router.push('/trips')
 
 
-     
-
-
     } catch (error) {
         console.log(error);
     }
+ 
 
 }
   const getData = async () => {
@@ -196,6 +195,7 @@ const DetailsPage = () => {
             totalPrice: listing.price * (moment(endDay).diff(moment(startDay), 'days') + 1)
 
           });
+       
           router.push('/trips')
           setCalendarOpen(false);
         }}>

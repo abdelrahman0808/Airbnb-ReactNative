@@ -20,6 +20,7 @@ import moment from 'moment';
 const { width } = Dimensions.get('window');
 const IMG_HEIGHT = 300;
 
+
 const DetailsPage = () => {
   const { id } = useLocalSearchParams();
   const [listing, setListing] = useState<any>({});
@@ -32,9 +33,7 @@ const DetailsPage = () => {
 
 
   const getData = async () => {
-
-
-    const docRef = doc(db, "listings", `${id}`);
+    const docRef =  doc(db, "listings", `${id}`)  ;
     const docSnap = await getDoc(docRef);
     setListing({ ...docSnap.data() })
     setIsLoading(false)

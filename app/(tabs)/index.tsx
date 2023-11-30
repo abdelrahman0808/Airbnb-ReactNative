@@ -11,7 +11,7 @@ import listingsDataGeo from '@/assets/data/airbnb-listings.geo.json';
 
 const Page = () => {
   const [items, setItems] = useState<any[]>([]);
-  const [category, setCategory] = useState<string>('Tiny homes');
+  const [category, setCategory] = useState<string>('All');
   const getoItems = useMemo(() => listingsDataGeo, []);
 
 
@@ -28,9 +28,65 @@ const Page = () => {
     getData();
   }, [])
 
-  const onDataChanged = (category: string) => {
+  const onDataChanged = async (category: string) => {
+    if (category=='All') {
+      await getDocs(collection(db, "listings"))
+      .then((querySnapshot)=>{               
+          const newData = querySnapshot.docs
+              .map((doc) => ({...doc.data(), id:doc.id }));
+  
+          setItems([...newData]);
+      })
+  
+      
+    } else if(category=='Cabins') {
+      await getDocs(collection(db, "Cabins"))
+      .then((querySnapshot)=>{               
+          const newData = querySnapshot.docs
+              .map((doc) => ({...doc.data(), id:doc.id }));
+  
+          setItems([...newData]);
+      })
+  
+      
+    }  else if(category=='City') {
+    await getDocs(collection(db, "City"))
+    .then((querySnapshot)=>{               
+        const newData = querySnapshot.docs
+            .map((doc) => ({...doc.data(), id:doc.id }));
+
+        setItems([...newData]);
+    })
+
+    
+  }   else if(category=='Tiny homes') {
+  await getDocs(collection(db, "Tiny"))
+  .then((querySnapshot)=>{               
+      const newData = querySnapshot.docs
+          .map((doc) => ({...doc.data(), id:doc.id }));
+
+      setItems([...newData]);
+  })
+
+  
+} 
+    
+    else {
+      await getDocs(collection(db, "listings"))
+      .then((querySnapshot)=>{               
+          const newData = querySnapshot.docs
+              .map((doc) => ({...doc.data(), id:doc.id }));
+  
+          setItems([...newData]);
+      })
+  
+      
+    }
     setCategory(category);
+
   };
+
+
 
   return (
     <View style={{ flex: 1, marginTop: 80 }}>

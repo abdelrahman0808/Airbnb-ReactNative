@@ -8,8 +8,8 @@ import { Link } from 'expo-router';
 
 const categories = [
   {
-    name: 'Tiny homes',
-    icon: 'home',
+    name: 'All',
+    icon: 'apartment',
   },
   {
     name: 'Cabins',
@@ -20,12 +20,12 @@ const categories = [
     icon: 'local-fire-department',
   },
   {
-    name: 'Play',
-    icon: 'videogame-asset',
+    name: 'Tiny homes',
+    icon: 'home',
   },
   {
     name: 'City',
-    icon: 'apartment',
+    icon: 'beach-access',
   },
   {
     name: 'Beachfront',
@@ -81,11 +81,12 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
           ref={scrollRef}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
-            alignItems: 'center',
+            // alignItems: 'center',
             gap: 20,
             paddingHorizontal: 16,
           }}>
           {categories.map((item, index) => (
+            
             <TouchableOpacity
               ref={(el) => (itemsRef.current[index] = el)}
               key={index}
@@ -109,6 +110,8 @@ const ExploreHeader = ({ onCategoryChanged }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop:25,
+    paddingTop:5,
     backgroundColor: '#fff',
     height: 130,
     elevation: 2,

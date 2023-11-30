@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { Button, View } from 'react-native';
 import React, { useEffect, useMemo, useState } from 'react';
 import ListingsBottomSheet from '@/components/ListingsBottomSheet';
 import {db} from '../../firebaseConfig';
@@ -6,9 +6,11 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Trips from '@/components/trips';
 
 const Page = () => {
+
   const [items, setItems] = useState<any[]>([]);
   const [category, setCategory] = useState<string>('Tiny homes');
   const [isLoading, setIsLoading] = useState(false);
+
 
   const getData = async () => {
     setItems([]);
@@ -23,6 +25,7 @@ const Page = () => {
                 ...document.data(),
                 ...docSnap.data()
               }
+              
               setItems((prev) => [...prev, {...toSet, id: document.id }])
             });
     })
@@ -38,7 +41,6 @@ const Page = () => {
 
   return (
     <View style={{ flex: 1, marginTop: 0 }}>
-      {/* Define pour custom header */}
       <Trips listings={items} category={category} linkTo='/reservation/' />
     </View>
   );
