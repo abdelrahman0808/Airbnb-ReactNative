@@ -2,25 +2,20 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useMemo, useRef, useState } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import Listings from '@/components/Listings';
-import { Ionicons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 
 interface Props {
   listings: any[];
   category: string;
-  linkTo: "/listing/" | "/reservation/";
+  linkTo: "/listing/" | "/reservation/" ;
 }
 
-// Bottom sheet that wraps our Listings component
 const Trips = ({ listings, category, linkTo }: Props) => {
   const snapPoints = useMemo(() => ['10%', '100%'], []);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const [refresh, setRefresh] = useState<number>(0);
 
-//   const onShowMap = () => {
-//     bottomSheetRef.current?.collapse();
-//     setRefresh(refresh + 1);
-//   };
+
 
   return (
     <BottomSheet
@@ -32,12 +27,7 @@ const Trips = ({ listings, category, linkTo }: Props) => {
       style={styles.sheetContainer}>
       <View style={styles.contentContainer}>
         <Listings listings={listings} refresh={refresh} category={category} linkTo={linkTo} />
-        <View style={styles.absoluteView}>
-          {/* <TouchableOpacity onPress={onShowMap} style={styles.btn}>
-            <Text style={{ fontFamily: 'mon-sb', color: '#fff' }}>Map</Text>
-            <Ionicons name="map" size={20} style={{ marginLeft: 10 }} color={'#fff'} />
-          </TouchableOpacity> */}
-        </View>
+  
       </View>
     </BottomSheet>
   );

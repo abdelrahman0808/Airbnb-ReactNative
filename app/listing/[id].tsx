@@ -32,7 +32,6 @@ const DetailsPage = () => {
 
 
   const getData = async () => {
-    // something here is wrong
 
 
     const docRef = doc(db, "listings", `${id}`);
@@ -64,16 +63,16 @@ const DetailsPage = () => {
       headerBackground: () => (
         <Animated.View style={[headerAnimatedStyle, styles.header]}></Animated.View>
       ),
-      headerRight: () => (
-        <View style={styles.bar}>
-          <TouchableOpacity style={styles.roundButton} onPress={shareListing}>
-            <Ionicons name="share-outline" size={22} color={'#000'} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.roundButton}>
-            <Ionicons name="heart-outline" size={22} color={'#000'} />
-          </TouchableOpacity>
-        </View>
-      ),
+      // headerRight: () => (
+      //   <View style={styles.bar}>
+      //     <TouchableOpacity style={styles.roundButton} onPress={shareListing}>
+      //       <Ionicons name="share-outline" size={22} color={'#000'} />
+      //     </TouchableOpacity>
+      //     <TouchableOpacity style={styles.roundButton}>
+      //       <Ionicons name="heart-outline" size={22} color={'#000'} />
+      //     </TouchableOpacity>
+      //   </View>
+      // ),
       headerLeft: () => (
         <TouchableOpacity style={styles.roundButton} onPress={() => navigation.goBack()}>
           <Ionicons name="chevron-back" size={24} color={'#000'} />
@@ -112,6 +111,7 @@ const DetailsPage = () => {
   }
   return (
     <View style={styles.container}>
+      
       <Animated.ScrollView
         contentContainerStyle={{ paddingBottom: 100 }}
         ref={scrollRef}

@@ -155,6 +155,7 @@ const DetailsPage = () => {
           </View>
           <Text style={styles.location}>Start Date :{listing.startDate}</Text>
           <Text style={styles.location}>End Date :{listing.endDate}</Text>
+          <Text style={styles.location}>Total Price :{listing.totalPrice}</Text>
           <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20, marginTop: 20 }]} onPress={ () => onDelete(id) }>
             <Text style={defaultStyles.btnText}>Cancel Reservation</Text>
           </TouchableOpacity>
@@ -188,7 +189,6 @@ const DetailsPage = () => {
         }}>
         <CalendarView startDay={startDay} endDay={endDay} setStartDay={setStartDay} setEndDay={setEndDay} />
         <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20 }]} onPress={async () => {
-          // console.log('here we apply reservation', startDay, endDay)
           await addDoc(collection(db, "reservations"), {
             startDate: startDay,
             endDate: endDay,
@@ -203,18 +203,7 @@ const DetailsPage = () => {
         </TouchableOpacity>
       </Modal>
 
-      {/* <Animated.View style={defaultStyles.footer} entering={SlideInDown.delay(200)}>
-        <View
-          style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <TouchableOpacity style={styles.footerText}>
-            <Text style={styles.footerPrice}>€{listing.price}</Text>
-            <Text>night</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[defaultStyles.btn, { paddingRight: 20, paddingLeft: 20 }]} onPress={() => setCalendarOpen(true)}>
-            <Text style={defaultStyles.btnText}>Reserve</Text>
-          </TouchableOpacity>
-        </View>
-      </Animated.View> */}
+    
     </View>
   );
 };
