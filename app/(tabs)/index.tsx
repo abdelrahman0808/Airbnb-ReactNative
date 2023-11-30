@@ -1,19 +1,19 @@
 import { View } from 'react-native';
 import React, { useEffect, useMemo, useState } from 'react';
 import ListingsBottomSheet from '@/components/ListingsBottomSheet';
-import listingsData from '@/assets/data/airbnb-listings.json';
 import ListingsMap from '@/components/ListingsMap';
-import listingsDataGeo from '@/assets/data/airbnb-listings.geo.json';
 import { Stack } from 'expo-router';
 import ExploreHeader from '@/components/ExploreHeader';
 import {db} from '../../firebaseConfig';
 import { collection, getDocs } from "firebase/firestore";
-import { Listing } from '@/models/types';
+import listingsDataGeo from '@/assets/data/airbnb-listings.geo.json';
+
 
 const Page = () => {
   const [items, setItems] = useState<any[]>([]);
-  const getoItems = useMemo(() => listingsDataGeo, []);
   const [category, setCategory] = useState<string>('Tiny homes');
+  const getoItems = useMemo(() => listingsDataGeo, []);
+
 
   const getData = async () => {
     await getDocs(collection(db, "listings"))
@@ -34,7 +34,6 @@ const Page = () => {
 
   return (
     <View style={{ flex: 1, marginTop: 80 }}>
-      {/* Define pour custom header */}
       <Stack.Screen
         options={{
           header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,

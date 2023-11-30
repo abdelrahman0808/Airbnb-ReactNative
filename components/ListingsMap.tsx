@@ -13,8 +13,8 @@ interface Props {
 }
 
 const INITIAL_REGION = {
-  latitude: 37.33,
-  longitude: -122,
+  latitude: 31.205753,
+  longitude: 29.924526,
   latitudeDelta: 9,
   longitudeDelta: 9,
 };
@@ -23,17 +23,14 @@ const ListingsMap = memo(({ listings }: Props) => {
   const router = useRouter();
   const mapRef = useRef<any>(null);
 
-  // When the component mounts, locate the user
   useEffect(() => {
     onLocateMe();
   }, []);
 
-  // When a marker is selected, navigate to the listing page
   const onMarkerSelected = (event: any) => {
     router.push(`/listing/${event.properties.id}`);
   };
 
-  // Focus the map on the user's location
   const onLocateMe = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
@@ -52,7 +49,6 @@ const ListingsMap = memo(({ listings }: Props) => {
     mapRef.current?.animateToRegion(region);
   };
 
-  // Overwrite the renderCluster function to customize the cluster markers
   const renderCluster = (cluster: any) => {
     const { id, geometry, onPress, properties } = cluster;
 
@@ -90,7 +86,6 @@ const ListingsMap = memo(({ listings }: Props) => {
         clusterTextColor="#000"
         clusterFontFamily="mon-sb"
         renderCluster={renderCluster}>
-        {/* Render all our marker as usual */}
         {listings.features.map((item: any) => (
           <Marker
             coordinate={{
