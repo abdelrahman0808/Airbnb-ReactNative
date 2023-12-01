@@ -10,6 +10,7 @@ const Page = () => {
   const [items, setItems] = useState<any[]>([]);
   const [category, setCategory] = useState<string>('Tiny homes');
   const [isLoading, setIsLoading] = useState(false);
+  
 
 
   const getData = async () => {
@@ -28,6 +29,7 @@ const Page = () => {
               
               setItems((prev) => [...prev, {...toSet, id: document.id }])
             });
+            
     })
     setIsLoading(false)
   }

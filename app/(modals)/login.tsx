@@ -47,7 +47,9 @@ const Page = () => {
     }
   };
 
+
   const onSignUpPress = async () => {
+
     if (!isLoaded) {
       return;
     }
@@ -60,7 +62,6 @@ const Page = () => {
 
       // send the email.
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-      // change the UI to our pending section.
       setPendingVerification(true);
     } catch (err: any) {
       if(err.errors.code === "form_identifier_exists") {
@@ -73,6 +74,7 @@ const Page = () => {
 
   const onSignInPress = async () => {
     if (!isLoadedLogin) {
+      
       return;
     }
  
@@ -81,9 +83,9 @@ const Page = () => {
         identifier: emailAddress,
         password,
       });
-      // This is an important step,
-      // This indicates the user is signed in
+     
       await setActiveLogin({ session: completeSignIn.createdSessionId });
+      router.push('/profile');
     } catch (err: any) {
       if(err.errors[0].code === "form_identifier_not_found") {
         onSignUpPress();
@@ -142,7 +144,7 @@ const Page = () => {
               style={[defaultStyles.inputField, { marginBottom: 30 }]}
             />
           </View>
-          <TouchableOpacity onPress={onPressVerify}>
+          <TouchableOpacity style={defaultStyles.btn} onPress={onPressVerify}>
             <Text style={defaultStyles.btnText}>Verify Email</Text>
           </TouchableOpacity>
         </View>
